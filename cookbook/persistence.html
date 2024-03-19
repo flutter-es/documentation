@@ -1,0 +1,2798 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Persistence | Flutter</title>
+    <link rel="icon" href="../assets/images/branding/flutter/icon/64.png">
+    <link rel="apple-touch-icon" href="../assets/images/branding/flutter/logo/flutter-logomark-320px.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <meta name="google-site-verification" content="HFqxhSbf9YA_0rBglNLzDiWnrHiK_w4cqDh2YD2GEY4">
+      <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-ND4LWWZ');
+      </script>
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-67589403-1', 'auto');
+        ga('send', 'pageview');
+      </script>
+    
+
+    <meta name="description" content="A catalog of recipes for adding persistence to your Flutter app.">
+    <meta name="keywords" content="">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@flutterdev">
+
+    <meta property="og:title" content="Persistence">
+    <meta property="og:url" content="https://docs.flutter.dev/cookbook/persistence">
+    <meta property="og:description" content="A catalog of recipes for adding persistence to your Flutter app.">
+    <meta property="og:image" content="https://docs.flutter.dev/assets/images/flutter-logo-sharing.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Text:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <script>
+      window.__CALLBACKS = [];
+    </script>
+
+    <link rel="stylesheet" href="../assets/css/main.css?v=1710805468">
+    </head>
+  <body>
+
+    <section id="cookie-notice">
+  <div class="container">
+    <p>Google uses cookies to deliver its services, to personalize ads, and to 
+      analyze traffic. You can adjust your privacy controls anytime in your 
+      <a href="https://myaccount.google.com/data-and-personalization" target="_blank" rel="noopener">Google settings</a>. 
+      <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">Learn more</a>.
+    </p>
+    <button id="cookie-consent" class="btn btn-primary">Okay</button>
+  </div>
+</section>
+
+
+    
+      <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ND4LWWZ" height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+      </noscript>
+    
+
+    <div id="overlay-under-drawer"></div>
+
+    
+
+<header class="site-header">
+  <nav class="navbar navbar-expand-md justify-content-start justify-content-md-between">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="material-symbols">menu</i>
+    </button>
+
+    <a class="navbar-brand" href="../index.htm">
+      <img src='../assets/images/branding/flutter/logo%20text/horizontal/default.svg' alt='Flutter logo' height="37" width="129" class="align-middle">
+    </a>
+
+    <div id="navbarSupportedContent" class="collapse navbar-collapse flex-grow-0">
+      <div class="site-header__sheet-bg" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      </div>
+      <div class="site-header__sheet">
+        <ul class="navbar-nav">
+          <div class="site-sidebar site-sidebar--header d-md-none">
+            <ul class="nav flex-column"><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-1" role="button" aria-expanded="false" aria-controls="header-sidenav-1">Get started</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-1">
+            <li class="nav-item">
+    <a class="nav-link" href="../get-started/install.html">Install Flutter</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/test-drive.html">Test drive</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/codelab.html">Write your first app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/learn-more.html">Learn more</a>
+  </li>
+
+<div class="dropdown-divider"></div>
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-1-6" href="#header-sidenav-1-6" role="button" aria-expanded="false" aria-controls="header-sidenav-1-6">From another platform?
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-1-6">
+      <li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/android-devs.html">Flutter for Android devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/swiftui-devs.html">Flutter for SwiftUI devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/uikit-devs.html">Flutter for UIKit devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/react-native-devs.html">Flutter for React Native devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/web-devs.html">Flutter for web devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/xamarin-forms-devs.html">Flutter for Xamarin.Forms devs</a>
+  </li>
+
+<div class="dropdown-divider"></div><li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/declarative.html">Introduction to declarative UI</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/dart-swift-concurrency.html">Flutter versus Swift concurrency</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="https://dart.dev/overview" target="_blank" rel="noopener">Dart language overview</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-2" role="button" aria-expanded="false" aria-controls="header-sidenav-2">Stay up to date</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-2">
+            <li class="nav-item">
+    <a class="nav-link" href="../release/upgrade.html">Upgrade</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/archive.html">SDK archive</a>
+  </li>
+
+<div class="dropdown-divider"></div>
+<li class="nav-item">
+    <a class="nav-link" href="../release/whats-new.html">What's new</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/release-notes.html">Release notes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/breaking-changes.html">Breaking changes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/compatibility-policy.html">Compatibility policy</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link active collapsible" data-toggle="collapse" href="#header-sidenav-3" role="button" aria-expanded="true" aria-controls="header-sidenav-3">Codelabs & samples</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse show" id="header-sidenav-3">
+            <li class="nav-item">
+    <a class="nav-link" href="../codelabs.html">Codelabs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link active" href="../cookbook.html">Cookbook</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://flutter.github.io/samples/" target="_blank" rel="noopener">Samples and demos</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-4" role="button" aria-expanded="false" aria-controls="header-sidenav-4">App solutions</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-4">
+            <li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-4-1" href="#header-sidenav-4-1" role="button" aria-expanded="false" aria-controls="header-sidenav-4-1">Games
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-4-1">
+      <li class="nav-item">
+    <a class="nav-link" href="../resources/games-toolkit.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="games/achievements-leaderboard.html">Add achievements and leaderboards</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="plugins/google-mobile-ads.html">Add advertising</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="games/firestore-multiplayer.html">Add multiplayer support</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases#0" target="_blank" rel="noopener">Add in-app purchases</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://firebase.google.com/codelabs/firebase-auth-in-flutter-apps#0" target="_blank" rel="noopener">Add user authentication</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://firebase.google.com/docs/crashlytics/get-started?platform=flutter" target="_blank" rel="noopener">Debug using Crashlytics</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-4-2" href="#header-sidenav-4-2" role="button" aria-expanded="false" aria-controls="header-sidenav-4-2">News
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-4-2">
+      <li class="nav-item">
+    <a class="nav-link" href="../resources/news-toolkit.html">Build a news app</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-4-3" href="#header-sidenav-4-3" role="button" aria-expanded="false" aria-controls="header-sidenav-4-3">Monetization
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-4-3">
+      <li class="nav-item">
+    <a class="nav-link" href="https://flutter.dev/monetization" target="_blank" rel="noopener">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases#0" target="_blank" rel="noopener">Add in-app purchases</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-4-4" href="#header-sidenav-4-4" role="button" aria-expanded="false" aria-controls="header-sidenav-4-4">Maps
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-4-4">
+      <li class="nav-item">
+    <a class="nav-link" href="https://developers.google.com/maps/flutter-package" target="_blank" rel="noopener">Add maps to your app</a>
+  </li>
+
+</ul>
+  </li>
+</ul>
+        </li><li aria-hidden="true"><div class="sidebar-primary-divider"></div></li>
+    <li class="nav-header">User interface</li>
+    <li class="nav-item">
+          <a class=" nav-link" href="../ui.html">Introduction</a>
+        </li>
+      <li class="nav-item">
+          <a class=" nav-link" href="../ui/widgets.html">Widget catalog</a>
+        </li>
+      <li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-9" role="button" aria-expanded="false" aria-controls="header-sidenav-9">Layout</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-9">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/layout.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/layout/tutorial.html">Build a layout</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-9-3" href="../ui/layout/lists.html" role="button" aria-expanded="false" aria-controls="header-sidenav-9-3">Lists & grids
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-9-3">
+      <li class="nav-item">
+    <a class="nav-link" href="lists/basic-list.html">Create and use lists</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/horizontal-list.html">Create a horizontal list</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/grid-lists.html">Create a grid view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/mixed-list.html">Create lists with different types of items</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/spaced-items.html">Create lists with spaced items</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/long-lists.html">Work with long lists</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-9-4" href="../ui/layout/scrolling.html" role="button" aria-expanded="false" aria-controls="header-sidenav-9-4">Scrolling
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-9-4">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/layout/scrolling.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/layout/scrolling/slivers.html">Use slivers to achieve fancy scrolling</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/floating-app-bar.html">Place a floating app bar above a list</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="effects/parallax-scrolling.html">Create a scrolling parallax effect</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-9-5" href="../ui/layout/responsive/adaptive-responsive.html" role="button" aria-expanded="false" aria-controls="header-sidenav-9-5">Adaptive design
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-9-5">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/layout/responsive/adaptive-responsive.html">Adaptive and responsive app design</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/layout/responsive/building-adaptive-apps.html">Build an adaptive app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/orientation.html">Update app UI based on orientation</a>
+  </li>
+
+</ul>
+  </li>
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-10" role="button" aria-expanded="false" aria-controls="header-sidenav-10">Design & theming</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-10">
+            <li class="nav-item">
+    <a class="nav-link" href="design/themes.html">Share styles with themes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/design/material.html">Material design</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/breaking-changes/material-3-migration.html">Migrate to Material 3</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-10-4" href="../ui/design/text.html" role="button" aria-expanded="false" aria-controls="header-sidenav-10-4">Text
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-10-4">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/design/text/typography.html">Fonts & typography</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/fonts.html">Use a custom font</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/package-fonts.html">Export fonts from a package</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://pub.dev/packages/google_fonts" target="_blank" rel="noopener">Google Fonts package</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-10-5" href="../ui/design/graphics.html" role="button" aria-expanded="false" aria-controls="header-sidenav-10-5">Custom graphics
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-10-5">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/design/graphics/fragment-shaders.html">Use custom fragment shaders</a>
+  </li>
+
+</ul>
+  </li>
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-11" role="button" aria-expanded="false" aria-controls="header-sidenav-11">Interactivity</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-11">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity.html">Add interactivity to your app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-11-2" href="../ui/interactivity/gestures.html" role="button" aria-expanded="false" aria-controls="header-sidenav-11-2">Gestures
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-11-2">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity/gestures.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="gestures/handling-taps.html">Handle taps</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity/gestures/drag-outside.html">Drag an object outside an app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="effects/drag-a-widget.html">Drag a UI element within an app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="gestures/ripples.html">Add Material touch ripples</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="gestures/dismissible.html">Implement swipe to dismiss</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-11-3" href="../ui/interactivity/input.html" role="button" aria-expanded="false" aria-controls="header-sidenav-11-3">Input & forms
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-11-3">
+      <li class="nav-item">
+    <a class="nav-link" href="forms/text-input.html">Create and style a text field</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="forms/retrieve-input.html">Retrieve the value of a text field</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="forms/text-field-changes.html">Handle changes to a text field</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="forms/focus.html">Manage focus in text fields</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="forms/validation.html">Build a form with validation</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="design/snackbars.html">Display a snackbar</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity/actions-and-shortcuts.html">Implement actions & shortcuts</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity/focus.html">Manage keyboard focus</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-12" role="button" aria-expanded="false" aria-controls="header-sidenav-12">Assets & media</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-12">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/assets/assets-and-images.html">Add assets and images</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="images/network-image.html">Display images from the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="images/fading-in-images.html">Fade in images with a placeholder</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="plugins/play-video.html">Play and pause a video</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-13" role="button" aria-expanded="false" aria-controls="header-sidenav-13">Navigation & routing</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-13">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/navigation.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/tabs.html">Add tabs to your app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/navigation-basics.html">Navigate to a new screen and back</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/passing-data.html">Send data to a new screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/returning-data.html">Return data from a screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/drawer.html">Add a drawer to a screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/navigation/deep-linking.html">Setup deep linking</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/set-up-app-links.html">Setup app links for Android</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/set-up-universal-links.html">Setup universal links for iOS</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/navigation/url-strategies.html">Configure web URL strategies</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-14" role="button" aria-expanded="false" aria-controls="header-sidenav-14">Animations & transitions</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-14">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/animations.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/tutorial.html">Tutorial</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/implicit-animations.html">Implicit animations</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="animation/animated-container.html">Animate the properties of a container</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="animation/opacity-animation.html">Fade a widget in and out</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/hero-animations.html">Hero animations</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="animation/page-route-animation.html">Animate a page route transition</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="animation/physics-simulation.html">Animate using a physic simulation</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/staggered-animations.html">Staggered animations</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="effects/staggered-menu-animation.html">Create a staggered menu animation</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/overview.html">API overview</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-15" role="button" aria-expanded="false" aria-controls="header-sidenav-15">Accessibility & internationalization</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-15">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/accessibility-and-internationalization/accessibility.html">Accessibility</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/accessibility-and-internationalization/internationalization.html">Internationalization</a>
+  </li>
+
+
+</ul>
+        </li><li aria-hidden="true"><div class="sidebar-primary-divider"></div></li>
+    <li class="nav-header">Beyond UI</li>
+    <li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-18" role="button" aria-expanded="false" aria-controls="header-sidenav-18">Data & backend</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-18">
+            <li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-18-1" href="../data-and-backend/state-mgmt.html" role="button" aria-expanded="false" aria-controls="header-sidenav-18-1">State management
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-18-1">
+      <li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/intro.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/declarative.html">Think declaratively</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/ephemeral-vs-app.html">Ephemeral vs app state</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/simple.html">Simple app state management</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/options.html">Options</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-18-2" href="../data-and-backend/networking.html" role="button" aria-expanded="false" aria-controls="header-sidenav-18-2">Networking & http
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-18-2">
+      <li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/networking.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/fetch-data.html">Fetch data from the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/authenticated-requests.html">Make authenticated requests</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/send-data.html">Send data to the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/update-data.html">Update data over the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/delete-data.html">Delete data on the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/web-sockets.html">Communicate with WebSockets</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-18-3" href="../data-and-backend/serialization.html" role="button" aria-expanded="false" aria-controls="header-sidenav-18-3">Serialization
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-18-3">
+      <li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/serialization/json.html">JSON serialization</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/background-parsing.html">Parse JSON in the background</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-18-4" href="../data-and-backend/persistence.html" role="button" aria-expanded="false" aria-controls="header-sidenav-18-4">Persistence
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-18-4">
+      <li class="nav-item">
+    <a class="nav-link" href="persistence/key-value.html">Store key-value data on disk</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="persistence/reading-writing-files.html">Read and write files</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="persistence/sqlite.html">Persist data with SQLite</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/firebase.html">Firebase</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/google-apis.html">Google APIs</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-19" role="button" aria-expanded="false" aria-controls="header-sidenav-19">Platform integration</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-19">
+            <li class="nav-item">
+    <a class="nav-link" href="../reference/supported-platforms.html">Supported platforms</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/desktop.html">Build desktop apps with Flutter</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/platform-channels.html">Write platform-specific code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/platform-adaptations.html">Automatic platform adaptations</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-19-5" href="../platform-integration/android.html" role="button" aria-expanded="false" aria-controls="header-sidenav-19-5">Android
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-19-5">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/install-android.html">Add Android as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/splash-screen.html">Add a splash screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/c-interop.html">Bind to native code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/platform-views.html">Host a native Android view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/restore-state-android.html">Restore state on Android</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/chromeos.html">Target ChromeOS with Android</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-19-6" href="../platform-integration/ios.html" role="button" aria-expanded="false" aria-controls="header-sidenav-19-6">iOS
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-19-6">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/install-ios.html">Add iOS as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/apple-frameworks.html">Leverage Apple's system libraries</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/launch-screen.html">Add a launch screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/ios-app-clip.html">Add iOS App Clip support</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/app-extensions.html">Add iOS app extensions</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/c-interop.html">Bind to native code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/platform-views.html">Host a native iOS view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/ios-debugging.html">Enable debugging on iOS</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/restore-state-ios.html">Restore state on iOS</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-19-7" href="../platform-integration/linux.html" role="button" aria-expanded="false" aria-controls="header-sidenav-19-7">Linux
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-19-7">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/linux/building.html">Build a Linux app</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-19-8" href="../platform-integration/macos.html" role="button" aria-expanded="false" aria-controls="header-sidenav-19-8">macOS
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-19-8">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/macos/install-macos.html">Add macOS as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/macos/building.html">Build a macOS app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/macos/c-interop.html">C interop</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-19-9" href="../platform-integration/web.html" role="button" aria-expanded="false" aria-controls="header-sidenav-19-9">Web
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-19-9">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/install-web.html">Add web as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/building.html">Build a web app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/faq.html">Web FAQ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/renderers.html">Web renderers</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/initialization.html">Custom app initialization</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/web-images.html">Displaying images on the web</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-19-10" href="../platform-integration/windows.html" role="button" aria-expanded="false" aria-controls="header-sidenav-19-10">Windows
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-19-10">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/windows/install-windows.html">Add Windows as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/windows/building.html">Build a Windows app</a>
+  </li>
+
+</ul>
+  </li>
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-20" role="button" aria-expanded="false" aria-controls="header-sidenav-20">Packages & plugins</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-20">
+            <li class="nav-item">
+    <a class="nav-link" href="../packages-and-plugins/using-packages.html">Use packages & plugins</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../packages-and-plugins/developing-packages.html">Develop packages & plugins</a>
+  </li>
+
+<div class="dropdown-divider"></div>
+<li class="nav-item">
+    <a class="nav-link" href="../packages-and-plugins/favorites.html">Flutter Favorites</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://pub.dev/flutter" target="_blank" rel="noopener">Package repository</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-21" role="button" aria-expanded="false" aria-controls="header-sidenav-21">Testing & debugging</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-21">
+            <li class="nav-header">Testing</li><li class="nav-item">
+    <a class="nav-link" href="../testing/overview.html">Testing overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-21-3" href="#header-sidenav-21-3" role="button" aria-expanded="false" aria-controls="header-sidenav-21-3">Unit testing
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-21-3">
+      <li class="nav-item">
+    <a class="nav-link" href="testing/unit/introduction.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/unit/mocking.html">Mock dependencies</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-21-4" href="#header-sidenav-21-4" role="button" aria-expanded="false" aria-controls="header-sidenav-21-4">Widget testing
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-21-4">
+      <li class="nav-item">
+    <a class="nav-link" href="testing/widget/introduction.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/widget/finders.html">Find widgets</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/widget/scrolling.html">Simulate scrolling</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/widget/tap-drag.html">Simulate user interaction</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-21-5" href="#header-sidenav-21-5" role="button" aria-expanded="false" aria-controls="header-sidenav-21-5">Integration testing
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-21-5">
+      <li class="nav-item">
+    <a class="nav-link" href="testing/integration/introduction.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/integration-tests.html">Write and run an integration test</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/integration/profiling.html">Profile an integration test</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="../testing/testing-plugins.html">Test a plugin</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/plugins-in-tests.html">Handle plugin code in tests</a>
+  </li>
+
+<li class="nav-header">Debugging</li><li class="nav-item">
+    <a class="nav-link" href="../testing/debugging.html">Debugging tools</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/code-debugging.html">Debug your app programmatically</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/native-debugging.html">Use a native language debugger</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/build-modes.html">Flutter's build modes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/common-errors.html">Common Flutter errors</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/errors.html">Handle errors</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="maintenance/error-reporting.html">Report errors to a service</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-22" role="button" aria-expanded="false" aria-controls="header-sidenav-22">Performance & optimization</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-22">
+            <li class="nav-item">
+    <a class="nav-link" href="../perf.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/impeller.html">Impeller</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/best-practices.html">Performance best practices</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/app-size.html">App size</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/deferred-components.html">Deferred components</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/rendering-performance.html">Rendering performance</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/ui-performance.html">Performance profiling</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/web-performance.html">Performance profiling for web</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/shader.html">Shader compilation jank</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/metrics.html">Performance metrics</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/isolates.html">Concurrency and isolates</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/faq.html">Performance FAQ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/appendix.html">Appendix</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-23" role="button" aria-expanded="false" aria-controls="header-sidenav-23">Deployment</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-23">
+            <li class="nav-item">
+    <a class="nav-link" href="../deployment/obfuscate.html">Obfuscate Dart code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/flavors.html">Create flavors of an app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/android.html">Build and release an Android app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/ios.html">Build and release an iOS app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/macos.html">Build and release a macOS app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/linux.html">Build and release a Linux app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/windows.html">Build and release a Windows app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/web.html">Build and release a web app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/cd.html">Set up continuous deployment</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-24" role="button" aria-expanded="false" aria-controls="header-sidenav-24">Add to an existing app</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-24">
+            <li class="nav-item">
+    <a class="nav-link" href="../add-to-app.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-24-2" href="../add-to-app/android.html" role="button" aria-expanded="false" aria-controls="header-sidenav-24-2">Add to an Android app
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-24-2">
+      <li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/project-setup.html">Set up Android project</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/add-flutter-screen.html">Add a single Flutter screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/add-flutter-fragment.html">Add a Flutter Fragment</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/add-flutter-view.html">Add a Flutter View</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/plugin-setup.html">Use a Flutter plugin</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-24-3" href="../add-to-app/ios.html" role="button" aria-expanded="false" aria-controls="header-sidenav-24-3">Add to an iOS app
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-24-3">
+      <li class="nav-item">
+    <a class="nav-link" href="../add-to-app/ios/project-setup.html">Set up iOS project</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/ios/add-flutter-screen.html">Add a single Flutter screen</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="../add-to-app/debugging.html">Debug embedded Flutter module</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/multiple-flutters.html">Add multiple Flutter instances</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/performance.html">Loading sequence and performance</a>
+  </li>
+
+
+</ul>
+        </li><li aria-hidden="true"><div class="sidebar-primary-divider"></div></li>
+    <li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-26" role="button" aria-expanded="false" aria-controls="header-sidenav-26">Tools & editors</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-26">
+            <li class="nav-item">
+    <a class="nav-link" href="../tools/android-studio.html">Android Studio & IntelliJ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/vs-code.html">Visual Studio Code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#header-sidenav-26-3" href="../tools/devtools/overview.html" role="button" aria-expanded="false" aria-controls="header-sidenav-26-3">DevTools
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-26-3">
+      <li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/overview.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/android-studio.html">Install from Android Studio & IntelliJ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/vscode.html">Install from VS Code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/cli.html">Install from command line</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/inspector.html">Flutter inspector</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/performance.html">Performance view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/cpu-profiler.html">CPU Profiler view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/memory.html">Memory view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/console.html">Debug console view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/network.html">Network view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/debugger.html">Debugger</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/logging.html">Logging view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/app-size.html">App size tool</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/extensions.html">DevTools extensions</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/release-notes.html">Release notes</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="../tools/sdk.html">SDK overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/pubspec.html">Flutter's pubspec options</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/flutter-fix.html">Automated fixes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/formatting.html">Code formatting</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-27" role="button" aria-expanded="false" aria-controls="header-sidenav-27">Flutter concepts</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-27">
+            <li class="nav-item">
+    <a class="nav-link" href="../resources/architectural-overview.html">Architectural overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/inside-flutter.html">Inside Flutter</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/layout/constraints.html">Understanding constraints</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/build-modes.html">Flutter's build modes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/hot-reload.html">Hot reload</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#header-sidenav-28" role="button" aria-expanded="false" aria-controls="header-sidenav-28">Resources</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="header-sidenav-28">
+            <li class="nav-header">Learning</li><li class="nav-item">
+    <a class="nav-link" href="../resources/faq.html">FAQ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/books.html">Books</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/videos.html">Videos</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/courses.html">Courses</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/bootstrap-into-dart.html">Learn Dart</a>
+  </li>
+
+<li class="nav-header">Contributing</li><li class="nav-item">
+    <a class="nav-link" href="../resources/bug-reports.html">Create useful bug reports</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://github.com/flutter/flutter/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribute to Flutter</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/resources/design-docs">Design documents</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link  collapsible" data-toggle="collapse" href="#header-sidenav-29" role="button" aria-expanded="true" aria-controls="header-sidenav-29">Reference</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse show" id="header-sidenav-29">
+            <li class="nav-item">
+    <a class="nav-link" href="../dash.html">Who is Dash?</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../reference/widgets.html">Widget index</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://api.flutter.dev" target="_blank" rel="noopener">API reference</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../reference/flutter-cli.html">flutter CLI reference</a>
+  </li>
+
+
+</ul>
+        </li></ul>
+
+          </div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="platform-navbar-dropdown" href="https://flutter.dev/multi-platform" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Multi-Platform
+            </a>
+            <div class="dropdown-menu" aria-labelledby="platform-navbar-dropdown">
+              <a class="dropdown-item" href="https://flutter.dev/multi-platform/mobile">Mobile</a>
+              <a class="dropdown-item" href="https://flutter.dev/multi-platform/web">Web</a>
+              <a class="dropdown-item" href="https://flutter.dev/multi-platform/desktop">Desktop</a>
+              <a class="dropdown-item" href="https://flutter.dev/multi-platform/embedded">Embedded</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dev-navbar-dropdown" href="https://flutter.dev/" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Development
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dev-navbar-dropdown">
+              <a class="dropdown-item" href="https://flutter.dev/learn">Learn</a>
+              <a class="dropdown-item" href="https://pub.dev/flutter/favorites" target="_blank">Flutter Favorites</a>
+              <a class="dropdown-item" href="https://pub.dev/" target="_blank">Packages</a>
+              <a class="dropdown-item" href="https://flutter.dev/monetization">Monetization</a>
+              <a class="dropdown-item" href="https://flutter.dev/games">Games</a>
+              <a class="dropdown-item" href="https://flutter.dev/news">News</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="ecosystem-navbar-dropdown" href="https://flutter.dev/ecosystem" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Ecosystem
+            </a>
+            <div class="dropdown-menu" aria-labelledby="ecosystem-navbar-dropdown">
+              <a class="dropdown-item" href="https://flutter.dev/community">Community</a>
+              <a class="dropdown-item" href="https://flutter.dev/events">Events</a>
+              <a class="dropdown-item" href="https://flutter.dev/culture">Culture</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://flutter.dev/showcase">Showcase</a>
+          </li>
+          <li class="nav-item dropdown docs-item">
+            <a class="nav-link dropdown-toggle" id="docs-navbar-dropdown" href="../index.htm" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Docs
+            </a>
+            <div class="dropdown-menu" aria-labelledby="docs-navbar-dropdown">
+              <a class="dropdown-item " href="../release/whats-new.html">What's new</a>
+              <a class="dropdown-item " href="../get-started/editor.html">Editor support</a>
+              <a class="dropdown-item " href="../tools/hot-reload.html">Hot reload</a>
+              <a class="dropdown-item " href="../perf/ui-performance.html">Profiling</a>
+              <a class="dropdown-item " href="../get-started/install.html">Install Flutter</a>
+              <a class="dropdown-item " href="../tools/devtools/overview.html">DevTools</a>
+              <a class="dropdown-item  active" href="../cookbook.html">Cookbook</a>
+              <a class="dropdown-item " href="../codelabs.html">Codelabs</a>
+            </div>
+          </li>
+        </ul>
+        <form action="/search/" class="site-header__search form-inline">
+          <input class="site-header__searchfield form-control" type="search" name="q" id="q" autocomplete="off" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+    </div>
+    <div class="site-header__social navbar-nav flex-row">
+      <a class="nav-item nav-link nav-icon" href="https://twitter.com/FlutterDev" aria-label="Open Flutter's Twitter in a new tab" target="_blank" rel="noreferrer">
+        <svg><use href="../assets/images/social/twitter.svg#twitter"></use></svg>
+      </a>
+      <a class="nav-item nav-link nav-icon" href="https://www.youtube.com/@flutterdev" aria-label="Open Flutter's YouTube in a new tab" target="_blank" rel="noreferrer">
+        <svg><use href="../assets/images/social/youtube.svg#youtube"></use></svg>
+      </a>
+      <a class="nav-item nav-link nav-icon" href="https://medium.com/flutter" aria-label="Open Flutter's Medium blog in a new tab" target="_blank" rel="noreferrer">
+        <svg><use href="../assets/images/social/medium.svg#medium"></use></svg>
+      </a>
+      <a class="nav-item nav-link nav-icon" href="https://github.com/flutter" aria-label="Open Flutter's GitHub in a new tab" target="_blank" rel="noreferrer">
+        <svg><use href="../assets/images/social/github.svg#github"></use></svg>
+      </a>
+    </div>
+    <a class="site-header__cta btn btn-primary" href="../get-started/install.html">Get started
+      </a>
+    </nav>
+</header>
+
+
+    <div class="site-banner site-banner--default" role="alert">
+  Flutter and Dart's latest releases are helping to
+  define the future of app development.
+  <a href="https://medium.com/flutter/starting-2024-strong-with-flutter-and-dart-cae9845264fe">Read the blog</a> to learn more.
+</div>
+
+
+    <div class="container-fluid position-relative">
+  <div class="row flex-xl-nowrap">
+    <div class="fixed-col site-sidebar site-sidebar--fixed col-12 col-md-3 col-xl-2 d-none d-md-block" data-fixed-column="">
+      
+      <ul class="nav flex-column"><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-1" role="button" aria-expanded="false" aria-controls="fixed-sidenav-1">Get started</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-1">
+            <li class="nav-item">
+    <a class="nav-link" href="../get-started/install.html">Install Flutter</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/test-drive.html">Test drive</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/codelab.html">Write your first app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/learn-more.html">Learn more</a>
+  </li>
+
+<div class="dropdown-divider"></div>
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-1-6" href="#fixed-sidenav-1-6" role="button" aria-expanded="false" aria-controls="fixed-sidenav-1-6">From another platform?
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-1-6">
+      <li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/android-devs.html">Flutter for Android devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/swiftui-devs.html">Flutter for SwiftUI devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/uikit-devs.html">Flutter for UIKit devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/react-native-devs.html">Flutter for React Native devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/web-devs.html">Flutter for web devs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/xamarin-forms-devs.html">Flutter for Xamarin.Forms devs</a>
+  </li>
+
+<div class="dropdown-divider"></div><li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/declarative.html">Introduction to declarative UI</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../get-started/flutter-for/dart-swift-concurrency.html">Flutter versus Swift concurrency</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="https://dart.dev/overview" target="_blank" rel="noopener">Dart language overview</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-2" role="button" aria-expanded="false" aria-controls="fixed-sidenav-2">Stay up to date</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-2">
+            <li class="nav-item">
+    <a class="nav-link" href="../release/upgrade.html">Upgrade</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/archive.html">SDK archive</a>
+  </li>
+
+<div class="dropdown-divider"></div>
+<li class="nav-item">
+    <a class="nav-link" href="../release/whats-new.html">What's new</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/release-notes.html">Release notes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/breaking-changes.html">Breaking changes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/compatibility-policy.html">Compatibility policy</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link active collapsible" data-toggle="collapse" href="#fixed-sidenav-3" role="button" aria-expanded="true" aria-controls="fixed-sidenav-3">Codelabs & samples</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse show" id="fixed-sidenav-3">
+            <li class="nav-item">
+    <a class="nav-link" href="../codelabs.html">Codelabs</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link active" href="../cookbook.html">Cookbook</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://flutter.github.io/samples/" target="_blank" rel="noopener">Samples and demos</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-4" role="button" aria-expanded="false" aria-controls="fixed-sidenav-4">App solutions</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-4">
+            <li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-4-1" href="#fixed-sidenav-4-1" role="button" aria-expanded="false" aria-controls="fixed-sidenav-4-1">Games
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-4-1">
+      <li class="nav-item">
+    <a class="nav-link" href="../resources/games-toolkit.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="games/achievements-leaderboard.html">Add achievements and leaderboards</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="plugins/google-mobile-ads.html">Add advertising</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="games/firestore-multiplayer.html">Add multiplayer support</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases#0" target="_blank" rel="noopener">Add in-app purchases</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://firebase.google.com/codelabs/firebase-auth-in-flutter-apps#0" target="_blank" rel="noopener">Add user authentication</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://firebase.google.com/docs/crashlytics/get-started?platform=flutter" target="_blank" rel="noopener">Debug using Crashlytics</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-4-2" href="#fixed-sidenav-4-2" role="button" aria-expanded="false" aria-controls="fixed-sidenav-4-2">News
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-4-2">
+      <li class="nav-item">
+    <a class="nav-link" href="../resources/news-toolkit.html">Build a news app</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-4-3" href="#fixed-sidenav-4-3" role="button" aria-expanded="false" aria-controls="fixed-sidenav-4-3">Monetization
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-4-3">
+      <li class="nav-item">
+    <a class="nav-link" href="https://flutter.dev/monetization" target="_blank" rel="noopener">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases#0" target="_blank" rel="noopener">Add in-app purchases</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-4-4" href="#fixed-sidenav-4-4" role="button" aria-expanded="false" aria-controls="fixed-sidenav-4-4">Maps
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-4-4">
+      <li class="nav-item">
+    <a class="nav-link" href="https://developers.google.com/maps/flutter-package" target="_blank" rel="noopener">Add maps to your app</a>
+  </li>
+
+</ul>
+  </li>
+</ul>
+        </li><li aria-hidden="true"><div class="sidebar-primary-divider"></div></li>
+    <li class="nav-header">User interface</li>
+    <li class="nav-item">
+          <a class=" nav-link" href="../ui.html">Introduction</a>
+        </li>
+      <li class="nav-item">
+          <a class=" nav-link" href="../ui/widgets.html">Widget catalog</a>
+        </li>
+      <li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-9" role="button" aria-expanded="false" aria-controls="fixed-sidenav-9">Layout</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-9">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/layout.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/layout/tutorial.html">Build a layout</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-9-3" href="../ui/layout/lists.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-9-3">Lists & grids
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-9-3">
+      <li class="nav-item">
+    <a class="nav-link" href="lists/basic-list.html">Create and use lists</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/horizontal-list.html">Create a horizontal list</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/grid-lists.html">Create a grid view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/mixed-list.html">Create lists with different types of items</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/spaced-items.html">Create lists with spaced items</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/long-lists.html">Work with long lists</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-9-4" href="../ui/layout/scrolling.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-9-4">Scrolling
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-9-4">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/layout/scrolling.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/layout/scrolling/slivers.html">Use slivers to achieve fancy scrolling</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="lists/floating-app-bar.html">Place a floating app bar above a list</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="effects/parallax-scrolling.html">Create a scrolling parallax effect</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-9-5" href="../ui/layout/responsive/adaptive-responsive.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-9-5">Adaptive design
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-9-5">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/layout/responsive/adaptive-responsive.html">Adaptive and responsive app design</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/layout/responsive/building-adaptive-apps.html">Build an adaptive app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/orientation.html">Update app UI based on orientation</a>
+  </li>
+
+</ul>
+  </li>
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-10" role="button" aria-expanded="false" aria-controls="fixed-sidenav-10">Design & theming</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-10">
+            <li class="nav-item">
+    <a class="nav-link" href="design/themes.html">Share styles with themes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/design/material.html">Material design</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../release/breaking-changes/material-3-migration.html">Migrate to Material 3</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-10-4" href="../ui/design/text.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-10-4">Text
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-10-4">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/design/text/typography.html">Fonts & typography</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/fonts.html">Use a custom font</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/package-fonts.html">Export fonts from a package</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://pub.dev/packages/google_fonts" target="_blank" rel="noopener">Google Fonts package</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-10-5" href="../ui/design/graphics.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-10-5">Custom graphics
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-10-5">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/design/graphics/fragment-shaders.html">Use custom fragment shaders</a>
+  </li>
+
+</ul>
+  </li>
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-11" role="button" aria-expanded="false" aria-controls="fixed-sidenav-11">Interactivity</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-11">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity.html">Add interactivity to your app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-11-2" href="../ui/interactivity/gestures.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-11-2">Gestures
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-11-2">
+      <li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity/gestures.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="gestures/handling-taps.html">Handle taps</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity/gestures/drag-outside.html">Drag an object outside an app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="effects/drag-a-widget.html">Drag a UI element within an app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="gestures/ripples.html">Add Material touch ripples</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="gestures/dismissible.html">Implement swipe to dismiss</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-11-3" href="../ui/interactivity/input.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-11-3">Input & forms
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-11-3">
+      <li class="nav-item">
+    <a class="nav-link" href="forms/text-input.html">Create and style a text field</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="forms/retrieve-input.html">Retrieve the value of a text field</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="forms/text-field-changes.html">Handle changes to a text field</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="forms/focus.html">Manage focus in text fields</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="forms/validation.html">Build a form with validation</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="design/snackbars.html">Display a snackbar</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity/actions-and-shortcuts.html">Implement actions & shortcuts</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/interactivity/focus.html">Manage keyboard focus</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-12" role="button" aria-expanded="false" aria-controls="fixed-sidenav-12">Assets & media</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-12">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/assets/assets-and-images.html">Add assets and images</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="images/network-image.html">Display images from the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="images/fading-in-images.html">Fade in images with a placeholder</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="plugins/play-video.html">Play and pause a video</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-13" role="button" aria-expanded="false" aria-controls="fixed-sidenav-13">Navigation & routing</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-13">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/navigation.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/tabs.html">Add tabs to your app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/navigation-basics.html">Navigate to a new screen and back</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/passing-data.html">Send data to a new screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/returning-data.html">Return data from a screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="design/drawer.html">Add a drawer to a screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/navigation/deep-linking.html">Setup deep linking</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/set-up-app-links.html">Setup app links for Android</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="navigation/set-up-universal-links.html">Setup universal links for iOS</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/navigation/url-strategies.html">Configure web URL strategies</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-14" role="button" aria-expanded="false" aria-controls="fixed-sidenav-14">Animations & transitions</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-14">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/animations.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/tutorial.html">Tutorial</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/implicit-animations.html">Implicit animations</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="animation/animated-container.html">Animate the properties of a container</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="animation/opacity-animation.html">Fade a widget in and out</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/hero-animations.html">Hero animations</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="animation/page-route-animation.html">Animate a page route transition</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="animation/physics-simulation.html">Animate using a physic simulation</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/staggered-animations.html">Staggered animations</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="effects/staggered-menu-animation.html">Create a staggered menu animation</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/animations/overview.html">API overview</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-15" role="button" aria-expanded="false" aria-controls="fixed-sidenav-15">Accessibility & internationalization</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-15">
+            <li class="nav-item">
+    <a class="nav-link" href="../ui/accessibility-and-internationalization/accessibility.html">Accessibility</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/accessibility-and-internationalization/internationalization.html">Internationalization</a>
+  </li>
+
+
+</ul>
+        </li><li aria-hidden="true"><div class="sidebar-primary-divider"></div></li>
+    <li class="nav-header">Beyond UI</li>
+    <li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-18" role="button" aria-expanded="false" aria-controls="fixed-sidenav-18">Data & backend</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-18">
+            <li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-18-1" href="../data-and-backend/state-mgmt.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-18-1">State management
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-18-1">
+      <li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/intro.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/declarative.html">Think declaratively</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/ephemeral-vs-app.html">Ephemeral vs app state</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/simple.html">Simple app state management</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/state-mgmt/options.html">Options</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-18-2" href="../data-and-backend/networking.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-18-2">Networking & http
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-18-2">
+      <li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/networking.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/fetch-data.html">Fetch data from the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/authenticated-requests.html">Make authenticated requests</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/send-data.html">Send data to the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/update-data.html">Update data over the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/delete-data.html">Delete data on the internet</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/web-sockets.html">Communicate with WebSockets</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-18-3" href="../data-and-backend/serialization.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-18-3">Serialization
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-18-3">
+      <li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/serialization/json.html">JSON serialization</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="networking/background-parsing.html">Parse JSON in the background</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-18-4" href="../data-and-backend/persistence.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-18-4">Persistence
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-18-4">
+      <li class="nav-item">
+    <a class="nav-link" href="persistence/key-value.html">Store key-value data on disk</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="persistence/reading-writing-files.html">Read and write files</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="persistence/sqlite.html">Persist data with SQLite</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/firebase.html">Firebase</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../data-and-backend/google-apis.html">Google APIs</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-19" role="button" aria-expanded="false" aria-controls="fixed-sidenav-19">Platform integration</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-19">
+            <li class="nav-item">
+    <a class="nav-link" href="../reference/supported-platforms.html">Supported platforms</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/desktop.html">Build desktop apps with Flutter</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/platform-channels.html">Write platform-specific code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/platform-adaptations.html">Automatic platform adaptations</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-19-5" href="../platform-integration/android.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-19-5">Android
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-19-5">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/install-android.html">Add Android as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/splash-screen.html">Add a splash screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/c-interop.html">Bind to native code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/platform-views.html">Host a native Android view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/restore-state-android.html">Restore state on Android</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/android/chromeos.html">Target ChromeOS with Android</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-19-6" href="../platform-integration/ios.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-19-6">iOS
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-19-6">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/install-ios.html">Add iOS as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/apple-frameworks.html">Leverage Apple's system libraries</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/launch-screen.html">Add a launch screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/ios-app-clip.html">Add iOS App Clip support</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/app-extensions.html">Add iOS app extensions</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/c-interop.html">Bind to native code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/platform-views.html">Host a native iOS view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/ios-debugging.html">Enable debugging on iOS</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/ios/restore-state-ios.html">Restore state on iOS</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-19-7" href="../platform-integration/linux.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-19-7">Linux
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-19-7">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/linux/building.html">Build a Linux app</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-19-8" href="../platform-integration/macos.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-19-8">macOS
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-19-8">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/macos/install-macos.html">Add macOS as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/macos/building.html">Build a macOS app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/macos/c-interop.html">C interop</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-19-9" href="../platform-integration/web.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-19-9">Web
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-19-9">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/install-web.html">Add web as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/building.html">Build a web app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/faq.html">Web FAQ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/renderers.html">Web renderers</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/initialization.html">Custom app initialization</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/web/web-images.html">Displaying images on the web</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-19-10" href="../platform-integration/windows.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-19-10">Windows
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-19-10">
+      <li class="nav-item">
+    <a class="nav-link" href="../platform-integration/windows/install-windows.html">Add Windows as build target</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../platform-integration/windows/building.html">Build a Windows app</a>
+  </li>
+
+</ul>
+  </li>
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-20" role="button" aria-expanded="false" aria-controls="fixed-sidenav-20">Packages & plugins</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-20">
+            <li class="nav-item">
+    <a class="nav-link" href="../packages-and-plugins/using-packages.html">Use packages & plugins</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../packages-and-plugins/developing-packages.html">Develop packages & plugins</a>
+  </li>
+
+<div class="dropdown-divider"></div>
+<li class="nav-item">
+    <a class="nav-link" href="../packages-and-plugins/favorites.html">Flutter Favorites</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://pub.dev/flutter" target="_blank" rel="noopener">Package repository</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-21" role="button" aria-expanded="false" aria-controls="fixed-sidenav-21">Testing & debugging</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-21">
+            <li class="nav-header">Testing</li><li class="nav-item">
+    <a class="nav-link" href="../testing/overview.html">Testing overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-21-3" href="#fixed-sidenav-21-3" role="button" aria-expanded="false" aria-controls="fixed-sidenav-21-3">Unit testing
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-21-3">
+      <li class="nav-item">
+    <a class="nav-link" href="testing/unit/introduction.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/unit/mocking.html">Mock dependencies</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-21-4" href="#fixed-sidenav-21-4" role="button" aria-expanded="false" aria-controls="fixed-sidenav-21-4">Widget testing
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-21-4">
+      <li class="nav-item">
+    <a class="nav-link" href="testing/widget/introduction.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/widget/finders.html">Find widgets</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/widget/scrolling.html">Simulate scrolling</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/widget/tap-drag.html">Simulate user interaction</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-21-5" href="#fixed-sidenav-21-5" role="button" aria-expanded="false" aria-controls="fixed-sidenav-21-5">Integration testing
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-21-5">
+      <li class="nav-item">
+    <a class="nav-link" href="testing/integration/introduction.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/integration-tests.html">Write and run an integration test</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="testing/integration/profiling.html">Profile an integration test</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="../testing/testing-plugins.html">Test a plugin</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/plugins-in-tests.html">Handle plugin code in tests</a>
+  </li>
+
+<li class="nav-header">Debugging</li><li class="nav-item">
+    <a class="nav-link" href="../testing/debugging.html">Debugging tools</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/code-debugging.html">Debug your app programmatically</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/native-debugging.html">Use a native language debugger</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/build-modes.html">Flutter's build modes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/common-errors.html">Common Flutter errors</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/errors.html">Handle errors</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="maintenance/error-reporting.html">Report errors to a service</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-22" role="button" aria-expanded="false" aria-controls="fixed-sidenav-22">Performance & optimization</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-22">
+            <li class="nav-item">
+    <a class="nav-link" href="../perf.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/impeller.html">Impeller</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/best-practices.html">Performance best practices</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/app-size.html">App size</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/deferred-components.html">Deferred components</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/rendering-performance.html">Rendering performance</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/ui-performance.html">Performance profiling</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/web-performance.html">Performance profiling for web</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/shader.html">Shader compilation jank</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/metrics.html">Performance metrics</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/isolates.html">Concurrency and isolates</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/faq.html">Performance FAQ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../perf/appendix.html">Appendix</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-23" role="button" aria-expanded="false" aria-controls="fixed-sidenav-23">Deployment</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-23">
+            <li class="nav-item">
+    <a class="nav-link" href="../deployment/obfuscate.html">Obfuscate Dart code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/flavors.html">Create flavors of an app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/android.html">Build and release an Android app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/ios.html">Build and release an iOS app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/macos.html">Build and release a macOS app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/linux.html">Build and release a Linux app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/windows.html">Build and release a Windows app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/web.html">Build and release a web app</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../deployment/cd.html">Set up continuous deployment</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-24" role="button" aria-expanded="false" aria-controls="fixed-sidenav-24">Add to an existing app</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-24">
+            <li class="nav-item">
+    <a class="nav-link" href="../add-to-app.html">Introduction</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-24-2" href="../add-to-app/android.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-24-2">Add to an Android app
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-24-2">
+      <li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/project-setup.html">Set up Android project</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/add-flutter-screen.html">Add a single Flutter screen</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/add-flutter-fragment.html">Add a Flutter Fragment</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/add-flutter-view.html">Add a Flutter View</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/android/plugin-setup.html">Use a Flutter plugin</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-24-3" href="../add-to-app/ios.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-24-3">Add to an iOS app
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-24-3">
+      <li class="nav-item">
+    <a class="nav-link" href="../add-to-app/ios/project-setup.html">Set up iOS project</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/ios/add-flutter-screen.html">Add a single Flutter screen</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="../add-to-app/debugging.html">Debug embedded Flutter module</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/multiple-flutters.html">Add multiple Flutter instances</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../add-to-app/performance.html">Loading sequence and performance</a>
+  </li>
+
+
+</ul>
+        </li><li aria-hidden="true"><div class="sidebar-primary-divider"></div></li>
+    <li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-26" role="button" aria-expanded="false" aria-controls="fixed-sidenav-26">Tools & editors</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-26">
+            <li class="nav-item">
+    <a class="nav-link" href="../tools/android-studio.html">Android Studio & IntelliJ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/vs-code.html">Visual Studio Code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsible collapsed" data-toggle="collapse" data-target="#fixed-sidenav-26-3" href="../tools/devtools/overview.html" role="button" aria-expanded="false" aria-controls="fixed-sidenav-26-3">DevTools
+    </a>
+    <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-26-3">
+      <li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/overview.html">Overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/android-studio.html">Install from Android Studio & IntelliJ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/vscode.html">Install from VS Code</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/cli.html">Install from command line</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/inspector.html">Flutter inspector</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/performance.html">Performance view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/cpu-profiler.html">CPU Profiler view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/memory.html">Memory view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/console.html">Debug console view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/network.html">Network view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/debugger.html">Debugger</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/logging.html">Logging view</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/app-size.html">App size tool</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/extensions.html">DevTools extensions</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/devtools/release-notes.html">Release notes</a>
+  </li>
+
+</ul>
+  </li><li class="nav-item">
+    <a class="nav-link" href="../tools/sdk.html">SDK overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/pubspec.html">Flutter's pubspec options</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/flutter-fix.html">Automated fixes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/formatting.html">Code formatting</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-27" role="button" aria-expanded="false" aria-controls="fixed-sidenav-27">Flutter concepts</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-27">
+            <li class="nav-item">
+    <a class="nav-link" href="../resources/architectural-overview.html">Architectural overview</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/inside-flutter.html">Inside Flutter</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../ui/layout/constraints.html">Understanding constraints</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../testing/build-modes.html">Flutter's build modes</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../tools/hot-reload.html">Hot reload</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link collapsed collapsible" data-toggle="collapse" href="#fixed-sidenav-28" role="button" aria-expanded="false" aria-controls="fixed-sidenav-28">Resources</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse " id="fixed-sidenav-28">
+            <li class="nav-header">Learning</li><li class="nav-item">
+    <a class="nav-link" href="../resources/faq.html">FAQ</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/books.html">Books</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/videos.html">Videos</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/courses.html">Courses</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../resources/bootstrap-into-dart.html">Learn Dart</a>
+  </li>
+
+<li class="nav-header">Contributing</li><li class="nav-item">
+    <a class="nav-link" href="../resources/bug-reports.html">Create useful bug reports</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://github.com/flutter/flutter/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribute to Flutter</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="/resources/design-docs">Design documents</a>
+  </li>
+
+
+</ul>
+        </li><li class="nav-item">
+          <a class="nav-link  collapsible" data-toggle="collapse" href="#fixed-sidenav-29" role="button" aria-expanded="true" aria-controls="fixed-sidenav-29">Reference</a>
+      
+          <ul class="nav flex-column flex-nowrap collapse show" id="fixed-sidenav-29">
+            <li class="nav-item">
+    <a class="nav-link" href="../dash.html">Who is Dash?</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../reference/widgets.html">Widget index</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="https://api.flutter.dev" target="_blank" rel="noopener">API reference</a>
+  </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="../reference/flutter-cli.html">flutter CLI reference</a>
+  </li>
+
+
+</ul>
+        </li></ul>
+
+    </div>
+
+    <main class="site-content col-12 col-md-9 offset-md-3 col-xl-8 offset-xl-2 col-xxl-8 offset-xxl-2">
+      <div class="container">
+
+        
+
+        
+
+        <header class="site-content__title">
+          <div id="page-github-links" class="btn-group" aria-label="Page GitHub links" role="group">
+  <a href="https://github.com/flutter/website/tree/main/src/cookbook/persistence/index.md" class="btn no-automatic-external" title="View page source" target="_blank" rel="noopener">
+    <i class="material-symbols">description</i>
+  </a>
+  <a href="https://github.com/flutter/website/issues/new?template=1_page_issue.yml&title=[PAGE ISSUE]: 'Persistence'&page-url=https://docs.flutter.dev/cookbook/persistence/&page-source=https://github.com/flutter/website/tree/main/src/cookbook/persistence/index.md" class="btn no-automatic-external" title="Report an issue with this page" target="_blank" rel="noopener">
+    <i class="material-symbols">bug_report</i>
+  </a>
+</div>
+
+          <h1>Persistence</h1>
+          
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" vocab="http://schema.org/" typeof="BreadcrumbList">
+  <li class="breadcrumb-item" property="itemListElement" typeof="ListItem"><a href="../cookbook.html" property="item" typeof="WebPage"><span property="name">Cookbook</span>
+      </a>
+      <meta property="position" content="1">
+    </li>
+  <li class="breadcrumb-item active" property="itemListElement" typeof="ListItem" aria-current="page"><a href="persistence.html" property="item" typeof="WebPage"><span property="name">Persistence</span>
+      </a>
+      <meta property="position" content="2">
+    </li>
+  
+  </ol>
+</nav>
+          </header>
+        
+        
+<ul>
+  <li><a href="persistence/sqlite.html">Persist data with SQLite</a></li>
+  <li><a href="persistence/reading-writing-files.html">Read and write files</a></li>
+  <li><a href="persistence/key-value.html">Store key-value data on disk</a></li>
+</ul>
+
+
+
+        
+      </div>
+    </main>
+  </div>
+</div>
+
+
+    
+      <footer class="site-footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 site-footer__wrapper">
+        <div class="site-footer__logo">
+          <img src="../assets/images/branding/flutter/logo/flutter-mono-81x100.png" alt="Flutter Logo" width="81" height="100">
+        </div>
+        <div class="site-footer__content">
+          <ul class="site-footer__link-list">
+              <li><a href="../tos.html">terms</a></li>
+              <li><a href="../brand.html">brand usage</a></li>
+              <li><a href="../security.html">security</a></li>
+              <li><a href="https://www.google.com/intl/en/policies/privacy">privacy</a></li>
+              <li><a href="https://esflutter.dev/">español</a></li>
+              <li><a href="https://flutter.cn" class="text-nowrap">社区中文资源</a></li> 
+              <li><a href="https://blog.google/inside-google/company-announcements/standing-with-black-community">We stand in solidarity with the Black community. Black Lives Matter.</a></li>
+          </ul>
+          <p class="licenses">
+            Except as otherwise noted,
+            this work is licensed under a
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0">Creative
+            Commons Attribution 4.0 International License</a>,
+            and code samples are licensed under the BSD License.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js" integrity="sha512-7rusk8kGPFynZWu26OKbTeI+QPoYchtxsmPeBqkHIEXJxeun4yJ4ISYe7C6sz9wdxeE1Gk3VxsIWgCZTc+vX3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.5/js.cookie.min.js" integrity="sha512-nlp9/l96/EpjYBx7EP7pGASVXNe80hGhYAUrjeXnu/fyF5Py0/RXav4BBNs7n5Hx1WFhOEOWSAVjGeC3oKxDVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="../assets/js/vendor/code-prettify/prettify.js?v=1710805468"></script>
+    <script src="../assets/js/vendor/code-prettify/lang-css.js?v=1710805468"></script>
+    <script src="../assets/js/vendor/code-prettify/lang-dart.js?v=1710805468"></script>
+    <script src="../assets/js/vendor/code-prettify/lang-yaml.js?v=1710805468"></script>
+    <script src="../assets/js/tabs.js?v=1710805468"></script>
+    <script src="../assets/js/archive.js?v=1710805468"></script>
+    <script src="../assets/js/main.js?v=1710805468"></script>
+
+    
+
+  </body>
+</html>
